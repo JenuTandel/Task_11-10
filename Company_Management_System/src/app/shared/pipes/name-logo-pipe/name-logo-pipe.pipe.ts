@@ -4,9 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'nameLogoPipe'
 })
 export class NameLogoPipePipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: string): string {
+    value = value.toUpperCase();
+    const nameArray = value.split(' ');
+    return `${nameArray[0].charAt(0)}${nameArray[1].charAt(0)}`;
   }
-
 }
