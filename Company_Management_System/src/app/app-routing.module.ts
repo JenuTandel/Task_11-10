@@ -8,7 +8,11 @@ const routes: Routes = [
     pathMatch:'full',
     redirectTo:'company'
   },
-  { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
+  { 
+    path: 'company', 
+    loadChildren: () => import('./company/company.module').then(m => m.CompanyModule),
+    data:{breadcrumb: {alias: 'Company'}}
+  },
   {
     path:'**',
     component:PageNotFoundComponent

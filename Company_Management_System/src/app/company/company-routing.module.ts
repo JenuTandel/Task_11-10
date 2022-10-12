@@ -7,6 +7,7 @@ const routes: Routes = [
   { 
     path: '', 
     component: CompanyComponent,
+    
     children:[
       {
         path:'',
@@ -15,11 +16,13 @@ const routes: Routes = [
       },
       {
         path:'add',
-        component:CompanyFormComponent
+        component:CompanyFormComponent,
+        data: { breadcrumb: {alias: 'Add'}},
       },
       {
         path:'edit/:company_id',
-        component:CompanyFormComponent
+        component:CompanyFormComponent,
+        data: { breadcrumb: {alias: 'Edit'}},
       }
     ]
   }
