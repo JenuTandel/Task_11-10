@@ -10,6 +10,9 @@ import { HeaderComponent } from './navbar/header/header.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    HeaderComponent
   ]
 })
 export class CoreModule { }
