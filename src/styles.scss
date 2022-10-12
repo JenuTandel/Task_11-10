@@ -1,0 +1,25 @@
+//Add bootstrap icon css file
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+
+//Add base index file
+@import "assets/scss/base/index";
+
+//Add vendor index file
+@import "assets/scss/vendor/index";
+
+//Add utilities index file
+@import "assets/scss/utilities/index";
+
+/* global */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: $font-family-base;
+}
