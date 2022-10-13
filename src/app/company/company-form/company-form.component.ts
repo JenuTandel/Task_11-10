@@ -75,13 +75,12 @@ export class CompanyFormComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.companyForm.reset();
   }
 
   AddCompanyData(){
     this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data:Company)=>{
-      console.log(data);
-      
+      console.log(data); 
     this.router.navigateByUrl("company/add");
     })
   }

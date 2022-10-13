@@ -33,4 +33,11 @@ export class CompanyListComponent implements OnInit {
     this.router.navigateByUrl(`company/edit/${company.id}`);
   }
 
+  onDeleteCompany(companyId:number){
+    if (confirm('Are you sure to delete this company?')){
+      this.companyService.deleteCompanyDetails(companyId).subscribe(()=>{
+        this.getCompanyData();
+      })
+    }
+  }
 }
