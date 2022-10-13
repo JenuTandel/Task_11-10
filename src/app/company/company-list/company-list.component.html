@@ -8,9 +8,9 @@
     </div>
     <div>
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>Jinal</span>
-                <span>Tandel</span>
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let company of companyList">
+                <span>{{company.companyName | nameLogoPipe}}</span>
+                <span>{{company.companyName}}</span>
                 <span class="bi bi-x-square"></span>
             </li>
         </ul>
