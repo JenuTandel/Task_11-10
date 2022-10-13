@@ -9,16 +9,16 @@
     },
     {
       "id": 2,
-      "companyName": "Eye Phone",
-      "companyDetails": "Eye Phone is an electronics company.",
+      "companyName": "Eye Company",
+      "companyDescription": "Eye Company is an electronics company.",
       "companyTags": [
         {
           "tag_id": "2",
           "tag_text": "Tag2"
         },
         {
-          "tag_id": "3",
-          "tag_text": "Tag3"
+          "tag_id": "1",
+          "tag_text": "Tag1"
         }
       ],
       "companyLogo": "image"

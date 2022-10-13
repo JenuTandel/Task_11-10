@@ -29,7 +29,7 @@ export class CompanyListComponent implements OnInit {
     this.router.navigateByUrl('company/add');
   }
 
-  onEdit(company:Company){
+  onEditCompany(company:Company){
     this.router.navigateByUrl(`company/edit/${company.id}`);
   }
 

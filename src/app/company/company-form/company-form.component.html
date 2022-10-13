@@ -13,13 +13,13 @@
         </div>
 
         <textarea class="form-control mb-3" placeholder="Company Description" id="floatingTextarea2"
-            style="height: 100px" formControlName="companyDetails"
-            [ngClass]="{'is-invalid':FormControls['companyDetails'].invalid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty),
-            'is-valid':FormControls['companyDetails'].valid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty)}"></textarea>
+            style="height: 100px" formControlName="companyDescription"
+            [ngClass]="{'is-invalid':FormControls['companyDescription'].invalid && (isSubmitted || FormControls['companyDescription'].touched || FormControls['companyDescription'].dirty),
+            'is-valid':FormControls['companyDescription'].valid && (isSubmitted || FormControls['companyDescription'].touched || FormControls['companyDescription'].dirty)}"></textarea>
         <!-- Validation for Company details -->
         <div
-            *ngIf="FormControls['companyDetails'].invalid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty)">
-            <span class="text-danger" *ngIf="FormControls['companyDetails'].errors?.['required']">
+            *ngIf="FormControls['companyDescription'].invalid && (isSubmitted || FormControls['companyDescription'].touched || FormControls['companyDescription'].dirty)">
+            <span class="text-danger" *ngIf="FormControls['companyDescription'].errors?.['required']">
                 Company details is required
             </span>
         </div>

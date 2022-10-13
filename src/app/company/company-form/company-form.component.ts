@@ -26,8 +26,8 @@ export class CompanyFormComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private companyService:CompanyService,
-    private router:Router
+    private companyService: CompanyService,
+    private router: Router
   ) {
     //Add Breadcrumbs based on condition
     if (this.activatedRoute.snapshot.params['company_id']) {
@@ -37,9 +37,10 @@ export class CompanyFormComponent implements OnInit {
       this.breadcrumbService.set("@Add", 'Company List')
     }
     this.companyForm = new FormGroup('');
-    this.companyId="";
-    this.activatedRoute.params.subscribe((params)=>{
+    this.companyId = "";
+    this.activatedRoute.params.subscribe((params) => {
       this.companyId = params['company_id'];
+      this.getCompanyDetails();
     });
   }
 
@@ -48,14 +49,12 @@ export class CompanyFormComponent implements OnInit {
       {
         id: [''],
         companyName: ['', Validators.required],
-        companyDetails: ['', Validators.required],
+        companyDescription: ['', Validators.required],
         companyTags: ['', Validators.required],
         companyLogo: ['', Validators.required]
       }
     )
-
     console.log(this.companyForm);
-    
   }
 
   uploadFile() {
@@ -68,9 +67,13 @@ export class CompanyFormComponent implements OnInit {
 
   onSaveCompany() {
     this.isSubmitted = true;
+    if (this.companyForm.valid) {
+      if (this.companyId) {
 
-    if(this.companyForm.valid){
-      this.AddCompanyData();
+      }
+      else {
+        this.AddCompanyData();
+      }
     }
   }
 
@@ -78,10 +81,22 @@ export class CompanyFormComponent implements OnInit {
     this.companyForm.reset();
   }
 
-  AddCompanyData(){
-    this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data:Company)=>{
-      console.log(data); 
-    this.router.navigateByUrl("company/add");
+  AddCompanyData() {
+    this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data: Company) => {
+      console.log(data);
+      this.router.navigateByUrl("company/add");
+    })
+  }
+
+  EditCompanyData() {
+    this.companyService.updateCompanyDetails(this.companyForm.value, Number(this.companyId)).subscribe(() => {
+
+    })
+  }
+
+  getCompanyDetails() {
+    this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
+      this.companyForm.patchValue(data);
     })
   }
 }
