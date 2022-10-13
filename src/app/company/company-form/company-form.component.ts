@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { Company } from '../company.model';
+import { CompanyService } from '../company.service';
 
 @Component({
   selector: 'app-company-form',
@@ -18,11 +20,14 @@ export class CompanyFormComponent implements OnInit {
 
   public companyForm: FormGroup;
   public isSubmitted: boolean = false;
+  public companyId: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private companyService:CompanyService,
+    private router:Router
   ) {
     //Add Breadcrumbs based on condition
     if (this.activatedRoute.snapshot.params['company_id']) {
@@ -32,6 +37,10 @@ export class CompanyFormComponent implements OnInit {
       this.breadcrumbService.set("@Add", 'Company List')
     }
     this.companyForm = new FormGroup('');
+    this.companyId="";
+    this.activatedRoute.params.subscribe((params)=>{
+      this.companyId = params['company_id'];
+    });
   }
 
   ngOnInit(): void {
@@ -59,11 +68,21 @@ export class CompanyFormComponent implements OnInit {
 
   onSaveCompany() {
     this.isSubmitted = true;
-    // console.log(this.isSubmitted);
-    // console.log(this.companyForm);
+
+    if(this.companyForm.valid){
+      this.AddCompanyData();
+    }
   }
 
   onCancel() {
 
+  }
+
+  AddCompanyData(){
+    this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data:Company)=>{
+      console.log(data);
+      
+    this.router.navigateByUrl("company/add");
+    })
   }
 }
