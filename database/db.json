@@ -1,11 +1,39 @@
 {
-    "companyDetails": [
+  "companyDetails": [
+    {
+      "id": 1,
+      "companyName": "1 Rivet",
+      "companyDescription": "1Rivet is the IT Company",
+      "companyTag": "1Star",
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
+    },
+    {
+      "id": 2,
+      "companyName": "ww r",
+      "companyDetails": "1111",
+      "companyTags": [
         {
-            "id": 1,
-            "companyName": "1 Rivet",
-            "companyDescription": "1Rivet is the IT Company",
-            "companyTag": "1Star",
-            "companyLogo": "/src/assets/images/Rivet_logo.png"
+          "tag_id": "1",
+          "tag_text": "Tag1"
         }
-    ]
+      ],
+      "companyLogo": "111"
+    },
+    {
+      "id": 3,
+      "companyName": "wwwwt kk",
+      "companyDetails": "wwwww",
+      "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        },
+        {
+          "tag_id": "3",
+          "tag_text": "Tag3"
+        }
+      ],
+      "companyLogo": "111"
+    }
+  ]
 }

@@ -15,4 +15,9 @@ export class CompanyService {
     const url = `${this.baseURL}/companyDetails`;
     return this.http.get<Company[]>(url);
   }
+
+  addCompanyDetails(company:Company):Observable<Company>{
+    const url = `${this.baseURL}/companyDetails`;
+    return this.http.post<Company>(url,company);
+  }
 }
