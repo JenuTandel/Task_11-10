@@ -1,0 +1,11 @@
+{
+    "companyDetails": [
+        {
+            "id": 1,
+            "companyName": "1Rivet",
+            "companyDescription": "1Rivet is the IT Company",
+            "companyTag": "1Star",
+            "companyLogo": "/src/assets/images/Rivet_logo.png"
+        }
+    ]
+}

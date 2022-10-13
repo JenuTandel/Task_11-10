@@ -1,1 +1,57 @@
-<p>company-form works!</p>
+<div class="p-3">
+    <form class="border p-4 rounded" [formGroup]="companyForm" #form="ngForm" (ngSubmit)="onSaveCompany()">
+        <pre> {{form?.submitted}}</pre>
+        <input class="form-control mb-3" type="text" placeholder="Company Name" formControlName="companyName"
+            [ngClass]="{'is-invalid':FormControls['companyName'].invalid && (isSubmitted || FormControls['companyName'].touched || FormControls['companyName'].dirty),
+            'is-valid':FormControls['companyName'].valid && (isSubmitted || FormControls['companyName'].touched || FormControls['companyName'].dirty)}">
+        <!-- Validation for Company name -->
+        <div
+            *ngIf="FormControls['companyName'].invalid && (isSubmitted || FormControls['companyName'].touched || FormControls['companyName'].dirty)">
+            <span class="text-danger" *ngIf="FormControls['companyName'].errors?.['required']">
+                Company name is required
+            </span>
+        </div>
+
+        <textarea class="form-control mb-3" placeholder="Company Description" id="floatingTextarea2"
+            style="height: 100px" formControlName="companyDetails"
+            [ngClass]="{'is-invalid':FormControls['companyDetails'].invalid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty),
+            'is-valid':FormControls['companyDetails'].valid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty)}"></textarea>
+        <!-- Validation for Company details -->
+        <div
+            *ngIf="FormControls['companyDetails'].invalid && (isSubmitted || FormControls['companyDetails'].touched || FormControls['companyDetails'].dirty)">
+            <span class="text-danger" *ngIf="FormControls['companyDetails'].errors?.['required']">
+                Company details is required
+            </span>
+        </div>
+
+        <ng-select class="mb-3" [items]="TagList" bindLabel="tag_text" placeholder="Select Tags" appendTo="body"
+            [multiple]="true" formControlName="companyTags">
+        </ng-select>
+        <!-- Validation for Company Tags -->
+        <div
+            *ngIf="FormControls['companyTags'].invalid && (isSubmitted || FormControls['companyTags'].touched || FormControls['companyTags'].dirty)">
+            <span class="text-danger" *ngIf="FormControls['companyTags'].errors?.['required']">
+                Select atleast one tag
+            </span>
+        </div>
+
+        <div class="input-group mb-3">
+            <!-- <input type="file" class="form-control" id="inputGroupFile02" placeholder="Select Logo"> -->
+            <input type="text" class="form-control" id="inputGroupFile02" placeholder="Select Logo"
+                formControlName="companyLogo">
+            <button type="button" class="input-group-text" (click)="uploadFile()">Browse</button>
+        </div>
+        <!-- Validation for Company Logo -->
+        <div
+            *ngIf="FormControls['companyLogo'].invalid && (isSubmitted || FormControls['companyLogo'].touched || FormControls['companyLogo'].dirty)">
+            <span class="text-danger" *ngIf="FormControls['companyLogo'].errors?.['required']">
+                Upload company logo
+            </span>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="reset" class="btn me-2 btn-outline-danger" (click)="onCancel()">Cancel</button>
+            <button type="button" class="btn btn-outline-success">Save</button>
+        </div>
+    </form>
+</div>
