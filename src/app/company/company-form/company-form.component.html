@@ -1,6 +1,6 @@
 <div class="p-3">
     <form class="border p-4 rounded" [formGroup]="companyForm" #form="ngForm" (ngSubmit)="onSaveCompany()">
-        <pre> {{form?.submitted}}</pre>
+        <!-- <pre> {{form?.submitted}}</pre> -->
         <input class="form-control mb-3" type="text" placeholder="Company Name" formControlName="companyName"
             [ngClass]="{'is-invalid':FormControls['companyName'].invalid && (isSubmitted || FormControls['companyName'].touched || FormControls['companyName'].dirty),
             'is-valid':FormControls['companyName'].valid && (isSubmitted || FormControls['companyName'].touched || FormControls['companyName'].dirty)}">
