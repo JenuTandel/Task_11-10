@@ -20,4 +20,9 @@ export class CompanyService {
     const url = `${this.baseURL}/companyDetails`;
     return this.http.post<Company>(url,company);
   }
+
+  deleteCompanyDetails(company_id:number):Observable<Company>{
+    const url = `${this.baseURL}/companyDetails/${company_id}`;
+    return this.http.delete<Company>(url);
+  }
 }
