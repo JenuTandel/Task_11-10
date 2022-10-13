@@ -8,6 +8,9 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { BreadcrumbModule } from "xng-breadcrumb";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { ReactiveFormsModule } from '@angular/forms';
+import { CompanyService } from './company.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     CompanyRoutingModule,
     BreadcrumbModule,
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule
   ],
+  providers:[CompanyService]
 })
 export class CompanyModule { }
