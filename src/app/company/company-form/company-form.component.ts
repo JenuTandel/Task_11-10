@@ -25,8 +25,6 @@ export class CompanyFormComponent implements OnInit {
   private companyName: string="";
   public title:string="";
 
-  // @Output() communicationEvent: EventEmitter<Company>
-
   constructor(
     private breadcrumbService: BreadcrumbService,
     private activatedRoute: ActivatedRoute,
@@ -53,13 +51,6 @@ export class CompanyFormComponent implements OnInit {
         this.title="Add";
       }
     });
-    // //Add Breadcrumbs based on condition
-    // if (this.activatedRoute.snapshot.params['company_id']) {
-    //   this.breadcrumbService.set("@Edit", this.companyName)
-    // }
-    // else {
-    //   this.breadcrumbService.set("@Add", 'Company List')
-    // }
   }
 
   ngOnInit(): void {
@@ -94,7 +85,7 @@ export class CompanyFormComponent implements OnInit {
       }
     }
     this.companyForm.reset();
-    // this.router.navigateByUrl("company/add");
+    this.router.navigateByUrl("company/add");
 
   }
 
