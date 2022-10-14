@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
+import { DataCommunicationService } from '../data-communication.service';
 
 @Component({
   selector: 'app-company-list',
@@ -11,11 +12,16 @@ import { CompanyService } from '../company.service';
 export class CompanyListComponent implements OnInit {
 
   public companyList:Company[];
-  constructor(private companyService:CompanyService, private router:Router) { 
+  constructor(private companyService:CompanyService, private router:Router, private dataCommunication:DataCommunicationService) { 
     this.companyList=[];
   }
 
   ngOnInit(): void {
+    this.dataCommunication.CommunicationData$.subscribe((data:any)=>{
+      if(data){
+        this.getCompanyData();
+      }
+    })
     this.getCompanyData();
   }
 
@@ -29,7 +35,7 @@ export class CompanyListComponent implements OnInit {
     this.router.navigateByUrl('company/add');
   }
 
-  onEdit(company:Company){
+  onEditCompany(company:Company){
     this.router.navigateByUrl(`company/edit/${company.id}`);
   }
 

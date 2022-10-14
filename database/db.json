@@ -4,24 +4,81 @@
       "id": 1,
       "companyName": "1 Rivet",
       "companyDescription": "1Rivet is the IT Company",
-      "companyTag": "1Star",
+      "companyTags": [
+        {
+          "tag_id": "2",
+          "tag_text": "Tag2"
+        }
+      ],
       "companyLogo": "/src/assets/images/Rivet_logo.png"
     },
     {
       "id": 2,
-      "companyName": "Eye Phone",
-      "companyDetails": "Eye Phone is an electronics company.",
+      "companyName": "Eye Company...",
+      "companyDescription": "Eye Company is an electronics company.",
       "companyTags": [
         {
           "tag_id": "2",
           "tag_text": "Tag2"
         },
         {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        }
+      ],
+      "companyLogo": "image"
+    },
+    {
+      "id": 3,
+      "companyName": "Iphone R",
+      "companyDescription": "tttt",
+      "companyTags": [
+        {
           "tag_id": "3",
           "tag_text": "Tag3"
         }
       ],
-      "companyLogo": "image"
+      "companyLogo": "111"
+    },
+    {
+      "id": 4,
+      "companyName": "Company Wondor",
+      "companyDescription": "Company",
+      "companyTags": [
+        {
+          "tag_id": "3",
+          "tag_text": "Tag3"
+        }
+      ],
+      "companyLogo": "111"
+    },
+    {
+      "id": 6,
+      "companyName": "Kiran rrrr",
+      "companyDescription": "www",
+      "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        }
+      ],
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
+    },
+    {
+      "id": 7,
+      "companyName": "Hetal Tandel",
+      "companyDescription": "sss",
+      "companyTags": [
+        {
+          "tag_id": "3",
+          "tag_text": "Tag3"
+        },
+        {
+          "tag_id": "2",
+          "tag_text": "Tag2"
+        }
+      ],
+      "companyLogo": "www"
     }
   ]
 }

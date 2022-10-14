@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
+import { DataCommunicationService } from '../data-communication.service';
 
 @Component({
   selector: 'app-company-form',
@@ -17,17 +18,20 @@ export class CompanyFormComponent implements OnInit {
     { tag_id: '3', tag_text: 'Tag3' },
     { tag_id: '4', tag_text: 'Tag4' },
   ];
-
+ 
   public companyForm: FormGroup;
   public isSubmitted: boolean = false;
   public companyId: string;
+
+  // @Output() communicationEvent: EventEmitter<Company>
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private companyService:CompanyService,
-    private router:Router
+    private companyService: CompanyService,
+    private router: Router,
+    private dataCommunication:DataCommunicationService
   ) {
     //Add Breadcrumbs based on condition
     if (this.activatedRoute.snapshot.params['company_id']) {
@@ -37,9 +41,10 @@ export class CompanyFormComponent implements OnInit {
       this.breadcrumbService.set("@Add", 'Company List')
     }
     this.companyForm = new FormGroup('');
-    this.companyId="";
-    this.activatedRoute.params.subscribe((params)=>{
+    this.companyId = "";
+    this.activatedRoute.params.subscribe((params) => {
       this.companyId = params['company_id'];
+      this.getCompanyDetails();
     });
   }
 
@@ -48,14 +53,12 @@ export class CompanyFormComponent implements OnInit {
       {
         id: [''],
         companyName: ['', Validators.required],
-        companyDetails: ['', Validators.required],
+        companyDescription: ['', Validators.required],
         companyTags: ['', Validators.required],
         companyLogo: ['', Validators.required]
       }
     )
-
     console.log(this.companyForm);
-    
   }
 
   uploadFile() {
@@ -68,20 +71,37 @@ export class CompanyFormComponent implements OnInit {
 
   onSaveCompany() {
     this.isSubmitted = true;
-
-    if(this.companyForm.valid){
-      this.AddCompanyData();
+    if (this.companyForm.valid) {
+      if (this.companyId) {
+        this.EditCompanyData();
+      }
+      else {
+        this.AddCompanyData();
+      }
     }
+    // this.router.navigateByUrl("company/add");
+    
   }
 
   onCancel() {
     this.companyForm.reset();
   }
 
-  AddCompanyData(){
-    this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data:Company)=>{
-      console.log(data); 
-    this.router.navigateByUrl("company/add");
+  AddCompanyData() {
+    this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data: Company) => {
+      this.dataCommunication.getData(data);
+    })
+  }
+
+  EditCompanyData() {
+    this.companyService.updateCompanyDetails(this.companyForm.value, Number(this.companyId)).subscribe((data) => {
+      this.dataCommunication.getData(data);
+    })
+  }
+
+  getCompanyDetails() {
+    this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
+      this.companyForm.patchValue(data);
     })
   }
 }
