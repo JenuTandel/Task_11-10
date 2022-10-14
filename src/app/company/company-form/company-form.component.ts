@@ -18,10 +18,11 @@ export class CompanyFormComponent implements OnInit {
     { tag_id: '3', tag_text: 'Tag3' },
     { tag_id: '4', tag_text: 'Tag4' },
   ];
- 
+
   public companyForm: FormGroup;
   public isSubmitted: boolean = false;
   public companyId: string;
+  private companyName: string="";
 
   // @Output() communicationEvent: EventEmitter<Company>
 
@@ -31,21 +32,31 @@ export class CompanyFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
     private router: Router,
-    private dataCommunication:DataCommunicationService
+    private dataCommunication: DataCommunicationService
   ) {
-    //Add Breadcrumbs based on condition
-    if (this.activatedRoute.snapshot.params['company_id']) {
-      this.breadcrumbService.set("@Edit", 'Company Name')
-    }
-    else {
-      this.breadcrumbService.set("@Add", 'Company List')
-    }
+    
     this.companyForm = new FormGroup('');
     this.companyId = "";
     this.activatedRoute.params.subscribe((params) => {
       this.companyId = params['company_id'];
       this.getCompanyDetails();
+
+      if(this.companyId){
+        setTimeout(() => {
+          this.breadcrumbService.set("@Edit", this.companyName)
+        }, 200);
+      }
+      else {
+        this.breadcrumbService.set("@Add", 'Company List')
+      }
     });
+    // //Add Breadcrumbs based on condition
+    // if (this.activatedRoute.snapshot.params['company_id']) {
+    //   this.breadcrumbService.set("@Edit", this.companyName)
+    // }
+    // else {
+    //   this.breadcrumbService.set("@Add", 'Company List')
+    // }
   }
 
   ngOnInit(): void {
@@ -80,7 +91,7 @@ export class CompanyFormComponent implements OnInit {
       }
     }
     // this.router.navigateByUrl("company/add");
-    
+
   }
 
   onCancel() {
@@ -102,6 +113,7 @@ export class CompanyFormComponent implements OnInit {
   getCompanyDetails() {
     this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
       this.companyForm.patchValue(data);
+      this.companyName = data.companyName;
     })
   }
 }

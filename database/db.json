@@ -53,18 +53,6 @@
       "companyLogo": "111"
     },
     {
-      "id": 6,
-      "companyName": "Kiran rrrr",
-      "companyDescription": "www",
-      "companyTags": [
-        {
-          "tag_id": "1",
-          "tag_text": "Tag1"
-        }
-      ],
-      "companyLogo": "/src/assets/images/Rivet_logo.png"
-    },
-    {
       "id": 7,
       "companyName": "Hetal Tandel",
       "companyDescription": "sss",
