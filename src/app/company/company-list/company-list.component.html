@@ -1,15 +1,15 @@
 <div class="border h-100">
     <div class="d-flex flex-column p-3 border">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <h4>Companies</h4>
-            <span class="bi bi-plus-circle" (click)="onAddCompany()"></span>
+            <h4 class="text-primary">Companies</h4>
+            <span class="bi bi-plus-circle text-primary" (click)="onAddCompany()"></span>
         </div>
         <input type="search" class="form-control" placeholder="Search" [(ngModel)]="searchInput">
     </div>
     <div>
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center" (click)="onEditCompany(company)" *ngFor="let company of companyList | search: searchInput">
-                <span class="companylogo d-flex align-items-center justify-content-center">{{company.companyName | nameLogoPipe}}</span>
+                <span class="companylogo text-white bg-primary d-flex align-items-center justify-content-center">{{company.companyName | nameLogoPipe}}</span>
                 <span>{{company.companyName}}</span>
                 <span class="bi bi-x-square" (click)="onDeleteCompany(company.id)"></span>
             </li>
