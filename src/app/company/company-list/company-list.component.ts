@@ -11,9 +11,12 @@ import { DataCommunicationService } from '../data-communication.service';
 })
 export class CompanyListComponent implements OnInit {
 
+  public searchInput:string;
   public companyList:Company[];
+
   constructor(private companyService:CompanyService, private router:Router, private dataCommunication:DataCommunicationService) { 
     this.companyList=[];
+    this.searchInput="";
   }
 
   ngOnInit(): void {
@@ -46,4 +49,14 @@ export class CompanyListComponent implements OnInit {
       })
     }
   }
+
+  // searchData(){
+  //   const search = this.searchInput.toLowerCase();
+  //   if(search!=''){
+  //     this.companyList = this.companyList.filter((item)=>{
+  //       return item.companyName.toLowerCase().includes(search);
+  //     })
+  //   }
+  //   this.getCompanyData();
+  // }
 }

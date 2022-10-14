@@ -23,6 +23,7 @@ export class CompanyFormComponent implements OnInit {
   public isSubmitted: boolean = false;
   public companyId: string;
   private companyName: string="";
+  public title:string="";
 
   // @Output() communicationEvent: EventEmitter<Company>
 
@@ -45,9 +46,11 @@ export class CompanyFormComponent implements OnInit {
         setTimeout(() => {
           this.breadcrumbService.set("@Edit", this.companyName)
         }, 200);
+        this.title="Edit";
       }
       else {
-        this.breadcrumbService.set("@Add", 'Company List')
+        this.breadcrumbService.set("@Add", 'Company List');
+        this.title="Add";
       }
     });
     // //Add Breadcrumbs based on condition
@@ -90,12 +93,14 @@ export class CompanyFormComponent implements OnInit {
         this.AddCompanyData();
       }
     }
+    this.companyForm.reset();
     // this.router.navigateByUrl("company/add");
 
   }
 
   onCancel() {
     this.companyForm.reset();
+    this.router.navigateByUrl("company/add")
   }
 
   AddCompanyData() {

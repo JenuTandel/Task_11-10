@@ -2,7 +2,7 @@
   "companyDetails": [
     {
       "id": 1,
-      "companyName": "1 Rivet",
+      "companyName": "1 Rivett",
       "companyDescription": "1Rivet is the IT Company",
       "companyTags": [
         {
@@ -67,6 +67,30 @@
         }
       ],
       "companyLogo": "www"
+    },
+    {
+      "id": 8,
+      "companyName": "Jinal Tandel111",
+      "companyDescription": "111",
+      "companyTags": [
+        {
+          "tag_id": "2",
+          "tag_text": "Tag2"
+        }
+      ],
+      "companyLogo": "111"
+    },
+    {
+      "id": 9,
+      "companyName": "Hello Rivet",
+      "companyDescription": "qq",
+      "companyTags": [
+        {
+          "tag_id": "2",
+          "tag_text": "Tag2"
+        }
+      ],
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
     }
   ]
 }
