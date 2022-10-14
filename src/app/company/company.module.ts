@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CompanyService } from './company.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { DataCommunicationService } from './data-communication.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,6 @@ import { SharedModule } from '../shared/shared.module';
     HttpClientModule,
     SharedModule
   ],
-  providers:[CompanyService]
+  providers:[CompanyService,DataCommunicationService]
 })
 export class CompanyModule { }
