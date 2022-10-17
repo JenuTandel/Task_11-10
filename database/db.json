@@ -51,6 +51,22 @@
         }
       ],
       "companyLogo": "111"
+    },
+    {
+      "id": 5,
+      "companyName": "1Rivet",
+      "companyDescription": "IT Company",
+      "companyTags": [
+        {
+          "tag_id": "4",
+          "tag_text": "Tag4"
+        },
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        }
+      ],
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
     }
   ]
 }
