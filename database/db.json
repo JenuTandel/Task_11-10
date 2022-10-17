@@ -51,46 +51,6 @@
         }
       ],
       "companyLogo": "111"
-    },
-    {
-      "id": 7,
-      "companyName": "Hetal Tandel",
-      "companyDescription": "sss",
-      "companyTags": [
-        {
-          "tag_id": "3",
-          "tag_text": "Tag3"
-        },
-        {
-          "tag_id": "2",
-          "tag_text": "Tag2"
-        }
-      ],
-      "companyLogo": "www"
-    },
-    {
-      "id": 8,
-      "companyName": "Jinal Tandel111",
-      "companyDescription": "111",
-      "companyTags": [
-        {
-          "tag_id": "2",
-          "tag_text": "Tag2"
-        }
-      ],
-      "companyLogo": "111"
-    },
-    {
-      "id": 9,
-      "companyName": "Hello Rivet",
-      "companyDescription": "qq",
-      "companyTags": [
-        {
-          "tag_id": "2",
-          "tag_text": "Tag2"
-        }
-      ],
-      "companyLogo": "/src/assets/images/Rivet_logo.png"
     }
   ]
 }
