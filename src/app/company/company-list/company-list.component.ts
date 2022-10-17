@@ -47,6 +47,7 @@ export class CompanyListComponent implements OnInit {
       this.companyService.deleteCompanyDetails(companyId).subscribe(()=>{
         this.getCompanyData();
       })
+      this.router.navigateByUrl("company/add")
     }
   }
 
