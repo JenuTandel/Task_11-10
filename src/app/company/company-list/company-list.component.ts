@@ -10,54 +10,57 @@ import { DataCommunicationService } from '../data-communication.service';
   styleUrls: ['./company-list.component.scss']
 })
 export class CompanyListComponent implements OnInit {
+  public searchInput: string;
+  public companyList: Company[];
+  public dataNotFound!: string;
 
-  public searchInput:string;
-  public companyList:Company[];
-
-  constructor(private companyService:CompanyService, private router:Router, private dataCommunication:DataCommunicationService) { 
-    this.companyList=[];
-    this.searchInput="";
+  constructor(private companyService: CompanyService, private router: Router, private dataCommunication: DataCommunicationService) {
+    this.companyList = [];
+    this.searchInput = "";
   }
-
   ngOnInit(): void {
-    this.dataCommunication.CommunicationData$.subscribe((data:any)=>{
-      if(data){
+    this.dataCommunication.CommunicationData$.subscribe((data: any) => {
+      if (data) {
         this.getCompanyData();
       }
     })
     this.getCompanyData();
+    console.log(this.companyList.length);
   }
 
-  getCompanyData(){
-    this.companyService.getCompanyDetails().subscribe((data:Company[])=>{
+  /**
+   * Function for call the HTTP get service method
+   */
+  getCompanyData() {
+    this.companyService.getCompanyDetails().subscribe((data: Company[]) => {
       this.companyList = data;
     })
   }
 
-  onAddCompany(){
+  /**
+   * When + (Add) button is clicked, this function is executed
+   */
+  onAddCompany() {
     this.router.navigateByUrl('company/add');
   }
 
-  onEditCompany(company:Company){
+  /**
+   * When we clicked on the list of company, this function is executed for edit the data
+   */
+  onEditCompany(company: Company) {
     this.router.navigateByUrl(`company/edit/${company.id}`);
   }
 
-  onDeleteCompany(companyId:number){
-    if (confirm('Are you sure to delete this company?')){
-      this.companyService.deleteCompanyDetails(companyId).subscribe(()=>{
+  /**
+   * When X (delete) button is clicked, this function is executed
+   * @param companyId 
+   */
+  onDeleteCompany(companyId: number) {
+    if (confirm('Are you sure to delete this company?')) {
+      this.companyService.deleteCompanyDetails(companyId).subscribe(() => {
         this.getCompanyData();
       })
       this.router.navigateByUrl("company/add")
     }
   }
-
-  // searchData(){
-  //   const search = this.searchInput.toLowerCase();
-  //   if(search!=''){
-  //     this.companyList = this.companyList.filter((item)=>{
-  //       return item.companyName.toLowerCase().includes(search);
-  //     })
-  //   }
-  //   this.getCompanyData();
-  // }
 }
