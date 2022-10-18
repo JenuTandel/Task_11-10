@@ -7,9 +7,9 @@
         <input type="search" class="form-control" placeholder="Search" [(ngModel)]="searchInput">
     </div>
     <div>
-        <ul class="list-group">
+        <ul class="list-group" *ngIf="companyList | search:searchInput as filteredData">
             <li class="list-group-item d-flex align-items-center"
-                *ngFor="let company of companyList | search: searchInput">
+                *ngFor="let company of filteredData">
                 <div class="d-flex flex-grow-1 align-items-center me-3" (click)="onEditCompany(company)">
                     <span
                         class="companylogo text-white bg-primary d-flex align-items-center justify-content-center">{{company.companyName
@@ -22,6 +22,7 @@
                 <span class="bi bi-x-square" (click)="onDeleteCompany(company.id)"></span>
 
             </li>
+            <div *ngIf="filteredData.length == 0" class="text-center text-danger">Data Not Found</div>
         </ul>
     </div>
 </div>

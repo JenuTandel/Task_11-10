@@ -2,9 +2,13 @@
   "companyDetails": [
     {
       "id": 1,
-      "companyName": "1 Rivett",
-      "companyDescription": "1Rivet is the IT Company",
+      "companyName": "1 Rivet",
+      "companyDescription": "IT Company",
       "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        },
         {
           "tag_id": "2",
           "tag_text": "Tag2"
@@ -14,25 +18,13 @@
     },
     {
       "id": 2,
-      "companyName": "Eye Company",
-      "companyDescription": "Eye Company is an electronics company.",
+      "companyName": "Company Wondor",
+      "companyDescription": "Marketing Company",
       "companyTags": [
         {
           "tag_id": "2",
           "tag_text": "Tag2"
         },
-        {
-          "tag_id": "1",
-          "tag_text": "Tag1"
-        }
-      ],
-      "companyLogo": "image"
-    },
-    {
-      "id": 3,
-      "companyName": "Iphone R",
-      "companyDescription": "tttt",
-      "companyTags": [
         {
           "tag_id": "3",
           "tag_text": "Tag3"
