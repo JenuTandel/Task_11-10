@@ -22,8 +22,8 @@ export class CompanyFormComponent implements OnInit {
   public companyForm: FormGroup;
   public isSubmitted: boolean = false;
   public companyId: string;
-  private companyName: string="";
-  public title:string="";
+  private companyName: string = "";
+  public title: string = "";
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -33,22 +33,20 @@ export class CompanyFormComponent implements OnInit {
     private router: Router,
     private dataCommunication: DataCommunicationService
   ) {
-    
     this.companyForm = new FormGroup('');
     this.companyId = "";
     this.activatedRoute.params.subscribe((params) => {
       this.companyId = params['company_id'];
-      this.getCompanyDetails();
-
-      if(this.companyId){
+      if (this.companyId) {
+        this.getCompanyDetails();
         setTimeout(() => {
           this.breadcrumbService.set("@Edit", this.companyName)
         }, 200);
-        this.title="Edit";
+        this.title = "Edit";
       }
       else {
         this.breadcrumbService.set("@Add", 'Company List');
-        this.title="Add";
+        this.title = "Add";
       }
     });
   }
@@ -65,15 +63,19 @@ export class CompanyFormComponent implements OnInit {
     )
     console.log(this.companyForm);
   }
-
   uploadFile() {
 
   }
-
+  /**
+   * Function that returns the formcontrols
+   */
   get FormControls(): { [key: string]: AbstractControl } {
     return this.companyForm.controls
   }
 
+  /**
+   * When Submit button is called, this function is executed.
+   */
   onSaveCompany() {
     this.isSubmitted = true;
     if (this.companyForm.valid) {
@@ -85,27 +87,39 @@ export class CompanyFormComponent implements OnInit {
       }
     }
     this.companyForm.reset();
+    this.isSubmitted = false;
     this.router.navigateByUrl("company/add");
-
   }
 
+  /**
+   * When Cancel button is called, this function is executed.
+   */
   onCancel() {
     this.companyForm.reset();
     this.router.navigateByUrl("company/add")
   }
 
+  /**
+   * Function for call the HTTP post service method
+   */
   AddCompanyData() {
     this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data: Company) => {
       this.dataCommunication.getData(data);
     })
   }
 
+  /**
+   * Function for call the HTTP put service method
+   */
   EditCompanyData() {
     this.companyService.updateCompanyDetails(this.companyForm.value, Number(this.companyId)).subscribe((data) => {
       this.dataCommunication.getData(data);
     })
   }
 
+  /**
+   * Function for call the HTTP get service by Id method
+   */
   getCompanyDetails() {
     this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
       this.companyForm.patchValue(data);
