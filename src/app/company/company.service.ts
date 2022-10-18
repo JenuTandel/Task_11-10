@@ -35,4 +35,10 @@ export class CompanyService {
     const url = `${this.baseURL}/companyDetails/${company_id}`;
     return this.http.get<Company>(url);
   }
+
+  public uploadImage(image: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post('http://127.0.0.1:5500/src/assets/images/', formData);
+  }
 }

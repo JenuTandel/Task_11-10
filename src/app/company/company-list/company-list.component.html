@@ -15,8 +15,12 @@
                         class="companylogo text-white bg-primary d-flex align-items-center justify-content-center">{{company.companyName
                         | nameLogoPipe}}</span>
                     <span class="ms-3 text-nowrap">{{company.companyName}}</span>
+                    <div class="logo-wrapper ms-3">
+                        <img class="w-100 h-100" [src]="company.companyLogo">
+                    </div>
                 </div>
                 <span class="bi bi-x-square" (click)="onDeleteCompany(company.id)"></span>
+
             </li>
         </ul>
     </div>

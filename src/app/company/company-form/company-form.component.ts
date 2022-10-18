@@ -20,6 +20,7 @@ export class CompanyFormComponent implements OnInit {
   ];
 
   public companyForm: FormGroup;
+  public companyLogoForm:FormGroup
   public isSubmitted: boolean = false;
   public companyId: string;
   private companyName: string="";
@@ -35,6 +36,7 @@ export class CompanyFormComponent implements OnInit {
   ) {
     
     this.companyForm = new FormGroup('');
+    this.companyLogoForm = new FormGroup('');
     this.companyId = "";
     this.activatedRoute.params.subscribe((params) => {
       this.companyId = params['company_id'];
@@ -63,11 +65,24 @@ export class CompanyFormComponent implements OnInit {
         companyLogo: ['', Validators.required]
       }
     )
+
+    this.companyLogoForm = this.formBuilder.group(
+      {
+        id:[''],
+        imageURL:['']
+      }
+    )
     console.log(this.companyForm);
   }
 
   uploadFile() {
-
+    console.log(this.companyForm.controls['companyLogo'].value);
+    
+    this.companyService.uploadImage(this.companyForm.controls['companyLogo'].value).subscribe((data)=>{
+      console.log(data);
+      
+    });
+    
   }
 
   get FormControls(): { [key: string]: AbstractControl } {
