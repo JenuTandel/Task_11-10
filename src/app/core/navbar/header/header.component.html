@@ -5,5 +5,11 @@
         </a>
         <h4>Companies</h4>
     </div>
-    <xng-breadcrumb class="ms-4 text-white"></xng-breadcrumb>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="company" class="text-white">Company</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['company','edit',companyId]" class="text-white"> {{companyName}}</a></li>
+        </ol>
+    </nav>
+    <!-- <xng-breadcrumb class="ms-4 text-white"></xng-breadcrumb> -->
 </nav>

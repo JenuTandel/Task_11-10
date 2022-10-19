@@ -23,7 +23,7 @@ export class CompanyFormComponent implements OnInit {
   public companyForm: FormGroup;
   public isSubmitted: boolean = false;
   public companyId: string;
-  private companyName: string = "";
+  public company_name!: string;
   public title: string = "";
 
   constructor(
@@ -36,21 +36,6 @@ export class CompanyFormComponent implements OnInit {
   ) {
     this.companyForm = new FormGroup('');
     this.companyId = "";
-   
-    // this.activatedRoute.params.subscribe((params) => {
-    //   this.companyId = params['company_id'];
-    //   if (this.companyId) {
-    //     // this.getCompanyDetails();
-    //     setTimeout(() => {
-    //       this.breadcrumbService.set("@Edit", this.companyName)
-    //     }, 200);
-    //     this.title = "Edit";
-    //   }
-    //   else {
-    //     this.breadcrumbService.set("@Add", 'Company List');
-    //     this.title = "Add";
-    //   }
-    // });
   }
 
   ngOnInit(): void {
@@ -63,12 +48,13 @@ export class CompanyFormComponent implements OnInit {
         companyLogo: ['', Validators.required]
       }
     )
-    console.log(this.companyForm);
-    console.log(this.activatedRoute);
-    
-    this.activatedRoute.data.subscribe((data)=>{
+    this.activatedRoute.data.subscribe((data) => {
       this.companyForm.patchValue(data['company']);
+      this.company_name = data['company']?.companyName;
+      this.companyId = data['company']?.id;
+      this.dataCommunication.getCompanyName(this.company_name, Number(this.companyId));
     })
+    this.title = this.companyId ? "Edit" : "Add";
   }
   uploadFile() {
 

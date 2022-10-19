@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataCommunicationService } from 'src/app/company/data-communication.service';
 import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
@@ -8,10 +9,14 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private breadcrumbService: BreadcrumbService) { }
+  public companyName!:string;
+  public companyId!:number;
+  constructor( private breadcrumbService: BreadcrumbService, private dataCommunicationService:DataCommunicationService) { }
 
   ngOnInit(): void {
-    //set breadcrumb for company module
-    this.breadcrumbService.set('@Company', 'Company')
+    this.dataCommunicationService.BreadCrumbData.subscribe((res:any)=>{
+      this.companyId = res.companyId;
+      this.companyName = res.companyName;
+    })
   }
 }

@@ -30,6 +30,6 @@ import { EditCompanyResolver } from './edit-company.resolver';
     SharedModule,
     FormsModule
   ],
-  providers:[CompanyService,DataCommunicationService, EditCompanyResolver]
+  providers:[CompanyService, EditCompanyResolver]
 })
 export class CompanyModule { }

@@ -31,6 +31,18 @@
         }
       ],
       "companyLogo": "/src/assets/images/Rivet_logo.png"
+    },
+    {
+      "id": 3,
+      "companyName": "London Dairy",
+      "companyDescription": "Chocolate Company...",
+      "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        }
+      ],
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
     }
   ]
 }
