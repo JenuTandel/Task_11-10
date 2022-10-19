@@ -5,6 +5,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { DataCommunicationService } from '../data-communication.service';
+import { EditCompanyResolver } from '../edit-company.resolver';
 
 @Component({
   selector: 'app-company-form',
@@ -31,24 +32,25 @@ export class CompanyFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
     private router: Router,
-    private dataCommunication: DataCommunicationService
+    private dataCommunication: DataCommunicationService,
   ) {
     this.companyForm = new FormGroup('');
     this.companyId = "";
-    this.activatedRoute.params.subscribe((params) => {
-      this.companyId = params['company_id'];
-      if (this.companyId) {
-        this.getCompanyDetails();
-        setTimeout(() => {
-          this.breadcrumbService.set("@Edit", this.companyName)
-        }, 200);
-        this.title = "Edit";
-      }
-      else {
-        this.breadcrumbService.set("@Add", 'Company List');
-        this.title = "Add";
-      }
-    });
+   
+    // this.activatedRoute.params.subscribe((params) => {
+    //   this.companyId = params['company_id'];
+    //   if (this.companyId) {
+    //     // this.getCompanyDetails();
+    //     setTimeout(() => {
+    //       this.breadcrumbService.set("@Edit", this.companyName)
+    //     }, 200);
+    //     this.title = "Edit";
+    //   }
+    //   else {
+    //     this.breadcrumbService.set("@Add", 'Company List');
+    //     this.title = "Add";
+    //   }
+    // });
   }
 
   ngOnInit(): void {
@@ -62,6 +64,11 @@ export class CompanyFormComponent implements OnInit {
       }
     )
     console.log(this.companyForm);
+    console.log(this.activatedRoute);
+    
+    this.activatedRoute.data.subscribe((data)=>{
+      this.companyForm.patchValue(data['company']);
+    })
   }
   uploadFile() {
 
@@ -120,10 +127,10 @@ export class CompanyFormComponent implements OnInit {
   /**
    * Function for call the HTTP get service by Id method
    */
-  getCompanyDetails() {
-    this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
-      this.companyForm.patchValue(data);
-      this.companyName = data.companyName;
-    })
-  }
+  // getCompanyDetails() {
+  //   this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
+  //     this.companyForm.patchValue(data);
+  //     this.companyName = data.companyName;
+  //   })
+  // }
 }
