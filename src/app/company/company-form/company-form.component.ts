@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { Company } from '../company.model';
@@ -21,11 +22,14 @@ export class CompanyFormComponent implements OnInit {
   ];
 
   public companyForm: FormGroup;
-  public companyLogoForm:FormGroup
+  public companyLogoForm: FormGroup
   public isSubmitted: boolean = false;
   public companyId: string;
   public company_name!: string;
   public title: string = "";
+
+  public base64String: any = "";
+  public imagePath: any;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -34,6 +38,7 @@ export class CompanyFormComponent implements OnInit {
     private companyService: CompanyService,
     private router: Router,
     private dataCommunication: DataCommunicationService,
+    private _sanitizer: DomSanitizer
   ) {
     this.companyForm = new FormGroup('');
     this.companyLogoForm = new FormGroup('');
@@ -57,15 +62,6 @@ export class CompanyFormComponent implements OnInit {
       this.dataCommunication.getCompanyName(this.company_name, Number(this.companyId));
     })
     this.title = this.companyId ? "Edit" : "Add";
-  }
-  uploadFile() {
-    console.log(this.companyForm.controls['companyLogo'].value);
-    
-    this.companyService.uploadImage(this.companyForm.controls['companyLogo'].value).subscribe((data)=>{
-      console.log(data);
-      
-    });
-    
   }
   /**
    * Function that returns the formcontrols
@@ -104,6 +100,7 @@ export class CompanyFormComponent implements OnInit {
    * Function for call the HTTP post service method
    */
   AddCompanyData() {
+    debugger;
     this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data: Company) => {
       this.dataCommunication.getData(data);
     })
@@ -119,12 +116,20 @@ export class CompanyFormComponent implements OnInit {
   }
 
   /**
-   * Function for call the HTTP get service by Id method
+   * Function for company logo uploading
+   * @param event 
    */
-  // getCompanyDetails() {
-  //   this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
-  //     this.companyForm.patchValue(data);
-  //     this.companyName = data.companyName;
-  //   })
-  // }
+  imageUploaded(event: any) {
+    debugger
+    var imagefile = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = () => {
+      this.base64String = String(reader.result).replace("data:", "")
+        .replace(/^.+,/, "");
+      console.log(this.base64String);
+      this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + this.base64String);
+    }
+    reader.readAsDataURL(imagefile);
+  }
 }

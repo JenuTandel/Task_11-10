@@ -37,10 +37,8 @@
         </div>
 
         <div class="input-group mb-3">
-            <!-- <input type="file" class="form-control" id="inputGroupFile02" placeholder="Select Logo"> -->
-            <input type="file" class="form-control" id="inputGroupFile02" placeholder="Select Logo"
-                formControlName="companyLogo">
-            <button type="button" class="input-group-text" (click)="uploadFile()">Browse</button>
+            <input type="file" (change)="imageUploaded($event)" id="uplaod" class="form-control" formControlName="companyLogo">
+            <!-- <button type="button" class="input-group-text" (click)="uploadFile()">Browse</button> -->
         </div>
         <!-- Validation for Company Logo -->
         <div
@@ -49,6 +47,7 @@
                 Upload company logo
             </span>
         </div>
+        <img [src]="imagePath" height="100" width="100">
 
         <div class="d-flex justify-content-end">
             <button type="reset" class="btn me-2 btn-danger" (click)="onCancel()">Cancel</button>

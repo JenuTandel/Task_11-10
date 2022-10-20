@@ -43,6 +43,22 @@
         }
       ],
       "companyLogo": "/src/assets/images/Rivet_logo.png"
+    },
+    {
+      "id": 4,
+      "companyName": "Apple",
+      "companyDescription": "Apple Inc. is an American multinational technology company specializing in consumer electronics, software and online services headquartered in Cupertino, California, United States.",
+      "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        },
+        {
+          "tag_id": "4",
+          "tag_text": "Tag4"
+        }
+      ],
+      "companyLogo": "C:\\fakepath\\company.PNG"
     }
   ]
 }
