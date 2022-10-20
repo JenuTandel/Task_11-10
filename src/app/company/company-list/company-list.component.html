@@ -8,15 +8,14 @@
     </div>
     <div>
         <ul class="list-group" *ngIf="companyList | search:searchInput as filteredData">
-            <li class="list-group-item d-flex align-items-center"
-                *ngFor="let company of filteredData">
+            <li class="list-group-item d-flex align-items-center" *ngFor="let company of filteredData">
                 <div class="d-flex flex-grow-1 align-items-center me-3" (click)="onEditCompany(company)">
                     <span
                         class="companylogo text-white bg-primary d-flex align-items-center justify-content-center">{{company.companyName
                         | nameLogoPipe}}</span>
-                    <span class="ms-3 text-nowrap">{{company.companyName}}</span>
-                    <div class="logo-wrapper ms-3">
-                        <img class="w-100 h-100" [src]="company.companyLogo">
+                    <div class="ms-3 d-flex flex-column">
+                        <span class="text-nowrap">{{company.companyName}}</span>
+                        <p class="description" [title]="company.companyDescription">{{company.companyDescription}}</p>
                     </div>
                 </div>
                 <span class="bi bi-x-square" (click)="onDeleteCompany(company.id)"></span>

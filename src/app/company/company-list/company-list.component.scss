@@ -13,11 +13,9 @@
     width:40px;
     border-radius: 50%;
 }
-.logo-wrapper{
-    height:50px;
-    width:50px;
-
-    img{
-        border-radius: 50%;
-    }
+.description{
+    width:100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

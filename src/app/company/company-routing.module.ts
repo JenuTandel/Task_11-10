@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyFormComponent } from './company-form/company-form.component';
 import { CompanyComponent } from './company.component';
+import { EditCompanyResolver } from './edit-company.resolver';
 
 const routes: Routes = [
   { 
@@ -17,12 +18,11 @@ const routes: Routes = [
       {
         path:'add',
         component:CompanyFormComponent,
-        data: { breadcrumb: {alias: 'Add'}},
       },
       {
         path:'edit/:company_id',
         component:CompanyFormComponent,
-        data: { breadcrumb: {alias: 'Edit'}},
+        resolve: {company: EditCompanyResolver},
       }
     ]
   }

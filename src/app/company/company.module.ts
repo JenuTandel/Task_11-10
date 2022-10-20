@@ -12,6 +12,7 @@ import { CompanyService } from './company.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { DataCommunicationService } from './data-communication.service';
+import { EditCompanyResolver } from './edit-company.resolver';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,6 @@ import { DataCommunicationService } from './data-communication.service';
     SharedModule,
     FormsModule
   ],
-  providers:[CompanyService,DataCommunicationService]
+  providers:[CompanyService, EditCompanyResolver]
 })
 export class CompanyModule { }

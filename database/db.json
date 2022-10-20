@@ -30,51 +30,19 @@
           "tag_text": "Tag3"
         }
       ],
-      "companyLogo": "111"
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
     },
     {
-      "id": 4,
-      "companyName": "Company Wondor",
-      "companyDescription": "Company",
+      "id": 3,
+      "companyName": "London Dairy",
+      "companyDescription": "Chocolate Company",
       "companyTags": [
-        {
-          "tag_id": "3",
-          "tag_text": "Tag3"
-        }
-      ],
-      "companyLogo": "111"
-    },
-    {
-      "id": 5,
-      "companyName": "Jinal Company",
-      "companyDescription": "IT Company",
-      "companyTags": [
-        {
-          "tag_id": "3",
-          "tag_text": "Tag3"
-        },
         {
           "tag_id": "1",
           "tag_text": "Tag1"
         }
       ],
-      "companyLogo": "C:\\fakepath\\logo1.jpg"
-    },
-    {
-      "id": 6,
-      "companyName": "My Company",
-      "companyDescription": "qqqq",
-      "companyTags": [
-        {
-          "tag_id": "2",
-          "tag_text": "Tag2"
-        },
-        {
-          "tag_id": "1",
-          "tag_text": "Tag1"
-        }
-      ],
-      "companyLogo": "C:\\fakepath\\logo.png"
+      "companyLogo": "/src/assets/images/Rivet_logo.png"
     }
   ]
 }

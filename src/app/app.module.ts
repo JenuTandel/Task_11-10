@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { DataCommunicationService } from './company/data-communication.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
     AppRoutingModule,
     CoreModule,
   ],
-  providers: [BreadcrumbService],
+  providers: [BreadcrumbService, DataCommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

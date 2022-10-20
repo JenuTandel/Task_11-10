@@ -5,6 +5,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { DataCommunicationService } from '../data-communication.service';
+import { EditCompanyResolver } from '../edit-company.resolver';
 
 @Component({
   selector: 'app-company-form',
@@ -23,7 +24,7 @@ export class CompanyFormComponent implements OnInit {
   public companyLogoForm:FormGroup
   public isSubmitted: boolean = false;
   public companyId: string;
-  private companyName: string = "";
+  public company_name!: string;
   public title: string = "";
 
   constructor(
@@ -32,25 +33,11 @@ export class CompanyFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
     private router: Router,
-    private dataCommunication: DataCommunicationService
+    private dataCommunication: DataCommunicationService,
   ) {
     this.companyForm = new FormGroup('');
     this.companyLogoForm = new FormGroup('');
     this.companyId = "";
-    this.activatedRoute.params.subscribe((params) => {
-      this.companyId = params['company_id'];
-      if (this.companyId) {
-        this.getCompanyDetails();
-        setTimeout(() => {
-          this.breadcrumbService.set("@Edit", this.companyName)
-        }, 200);
-        this.title = "Edit";
-      }
-      else {
-        this.breadcrumbService.set("@Add", 'Company List');
-        this.title = "Add";
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -63,14 +50,13 @@ export class CompanyFormComponent implements OnInit {
         companyLogo: ['', Validators.required]
       }
     )
-
-    this.companyLogoForm = this.formBuilder.group(
-      {
-        id:[''],
-        imageURL:['']
-      }
-    )
-    console.log(this.companyForm);
+    this.activatedRoute.data.subscribe((data) => {
+      this.companyForm.patchValue(data['company']);
+      this.company_name = data['company']?.companyName;
+      this.companyId = data['company']?.id;
+      this.dataCommunication.getCompanyName(this.company_name, Number(this.companyId));
+    })
+    this.title = this.companyId ? "Edit" : "Add";
   }
   uploadFile() {
     console.log(this.companyForm.controls['companyLogo'].value);
@@ -135,10 +121,10 @@ export class CompanyFormComponent implements OnInit {
   /**
    * Function for call the HTTP get service by Id method
    */
-  getCompanyDetails() {
-    this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
-      this.companyForm.patchValue(data);
-      this.companyName = data.companyName;
-    })
-  }
+  // getCompanyDetails() {
+  //   this.companyService.getCompanyById(Number(this.companyId)).subscribe((data: Company) => {
+  //     this.companyForm.patchValue(data);
+  //     this.companyName = data.companyName;
+  //   })
+  // }
 }
