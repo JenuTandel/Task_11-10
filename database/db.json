@@ -35,7 +35,7 @@
     {
       "id": 3,
       "companyName": "London Dairy",
-      "companyDescription": "Chocolate Company...",
+      "companyDescription": "Chocolate Company",
       "companyTags": [
         {
           "tag_id": "1",
