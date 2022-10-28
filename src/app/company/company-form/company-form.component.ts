@@ -30,6 +30,7 @@ export class CompanyFormComponent implements OnInit {
 
   public base64String: any = "";
   public imagePath: any;
+  public imageFile!:File;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -120,16 +121,23 @@ export class CompanyFormComponent implements OnInit {
    * @param event 
    */
   imageUploaded(event: any) {
-    debugger
-    var imagefile = event.target.files[0];
+
+    if(event.target.files.length > 0){
+      this.imageFile = event.target.files[0];
+      console.log(this.imageFile);
+      
+      this.companyForm.controls['companyLogo'].setValue(this.imageFile);
+    }
+    
     var reader = new FileReader();
 
     reader.onload = () => {
       this.base64String = String(reader.result).replace("data:", "")
         .replace(/^.+,/, "");
-      console.log(this.base64String);
+      console.log(this.companyForm);
+
       this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + this.base64String);
     }
-    reader.readAsDataURL(imagefile);
+    reader.readAsDataURL(this.imageFile);
   }
 }

@@ -59,6 +59,30 @@
         }
       ],
       "companyLogo": "C:\\fakepath\\company.PNG"
+    },
+    {
+      "id": 5,
+      "companyName": "dcd",
+      "companyDescription": "dsads",
+      "companyTags": [
+        {
+          "tag_id": "1",
+          "tag_text": "Tag1"
+        }
+      ],
+      "companyLogo": "C:\\fakepath\\company.PNG"
+    },
+    {
+      "id": 6,
+      "companyName": "dddd",
+      "companyDescription": "dddd",
+      "companyTags": [
+        {
+          "tag_id": "2",
+          "tag_text": "Tag2"
+        }
+      ],
+      "companyLogo": "C:\\fakepath\\company.PNG"
     }
   ]
 }
