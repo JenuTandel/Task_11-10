@@ -25,9 +25,9 @@ export class CompanyService {
    * @param company
    * @returns company
    */
-  addCompanyDetails(company:Company):Observable<Company>{
+  addCompanyDetails(company:any):Observable<any>{
     const url = `${this.baseURL}/companyDetails`;
-    return this.http.post<Company>(url,company);
+    return this.http.post<any>(url,company);
   }
 
   /**

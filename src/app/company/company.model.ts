@@ -4,4 +4,6 @@ export class Company{
     companyDescription!:string;
     companyTags!:string;
     companyLogo!:string;
+    companyLogoName!:string;
+    companyPath!:any;
 }

@@ -11,8 +11,9 @@
             <li class="list-group-item d-flex align-items-center" *ngFor="let company of filteredData">
                 <div class="d-flex flex-grow-1 align-items-center me-3" (click)="onEditCompany(company)">
                     <span
-                        class="companylogo text-white bg-primary d-flex align-items-center justify-content-center">{{company.companyName
+                        class="companylogo text-white bg-primary d-flex align-items-center justify-content-center me-3">{{company.companyName
                         | nameLogoPipe}}</span>
+                    <img [src]="'data:image/png;base64,'+company.companyPath" width="50px" height="50px" class="rounded-circle">
                     <div class="ms-3 d-flex flex-column">
                         <span class="text-nowrap">{{company.companyName}}</span>
                         <p class="description" [title]="company.companyDescription">{{company.companyDescription}}</p>

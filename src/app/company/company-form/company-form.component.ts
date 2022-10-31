@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { Company } from '../company.model';
@@ -28,9 +28,10 @@ export class CompanyFormComponent implements OnInit {
   public company_name!: string;
   public title: string = "";
 
-  public base64String: any = "";
+  public base64String: any;
   public imagePath: any;
-  public imageFile!:File;
+  public imageFile!: File;
+  public isImagevalue: boolean;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -44,6 +45,9 @@ export class CompanyFormComponent implements OnInit {
     this.companyForm = new FormGroup('');
     this.companyLogoForm = new FormGroup('');
     this.companyId = "";
+    this.base64String = '';
+    this.imagePath = '';
+    this.isImagevalue = false;
   }
 
   ngOnInit(): void {
@@ -53,14 +57,23 @@ export class CompanyFormComponent implements OnInit {
         companyName: ['', Validators.required],
         companyDescription: ['', Validators.required],
         companyTags: ['', Validators.required],
-        companyLogo: ['', Validators.required]
+        companyLogo: ['', Validators.required],
+        companyPath: [''],
+        companyLogoName: ['']
       }
     )
     this.activatedRoute.data.subscribe((data) => {
-      this.companyForm.patchValue(data['company']);
-      this.company_name = data['company']?.companyName;
       this.companyId = data['company']?.id;
-      this.dataCommunication.getCompanyName(this.company_name, Number(this.companyId));
+      if (!this.companyId) {
+        this.isImagevalue = false;
+      }
+      else {
+        this.isImagevalue = true;
+        this.companyForm.patchValue(data['company']);
+        this.company_name = data['company']?.companyName;
+        this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + this.companyForm.get('companyPath')?.value);
+        this.dataCommunication.getCompanyName(this.company_name, Number(this.companyId));
+      }
     })
     this.title = this.companyId ? "Edit" : "Add";
   }
@@ -85,6 +98,7 @@ export class CompanyFormComponent implements OnInit {
       }
     }
     this.companyForm.reset();
+    this.isImagevalue = false;
     this.isSubmitted = false;
     this.router.navigateByUrl("company/add");
   }
@@ -102,6 +116,9 @@ export class CompanyFormComponent implements OnInit {
    */
   AddCompanyData() {
     debugger;
+    this.companyForm.controls['companyLogoName'].patchValue(this.imageFile.name);
+    this.companyForm.controls['companyPath'].patchValue(this.base64String);
+    debugger
     this.companyService.addCompanyDetails(this.companyForm.value).subscribe((data: Company) => {
       this.dataCommunication.getData(data);
     })
@@ -111,6 +128,9 @@ export class CompanyFormComponent implements OnInit {
    * Function for call the HTTP put service method
    */
   EditCompanyData() {
+    this.companyForm.controls['companyPath'].patchValue(this.base64String);
+    this.companyForm.controls['companyLogoName'].patchValue(this.imageFile.name);
+
     this.companyService.updateCompanyDetails(this.companyForm.value, Number(this.companyId)).subscribe((data) => {
       this.dataCommunication.getData(data);
     })
@@ -122,22 +142,19 @@ export class CompanyFormComponent implements OnInit {
    */
   imageUploaded(event: any) {
 
-    if(event.target.files.length > 0){
+    if (event.target.files.length > 0) {
       this.imageFile = event.target.files[0];
-      console.log(this.imageFile);
-      
-      this.companyForm.controls['companyLogo'].setValue(this.imageFile);
+      // console.log(this.imageFile);
     }
-    
     var reader = new FileReader();
-
     reader.onload = () => {
       this.base64String = String(reader.result).replace("data:", "")
         .replace(/^.+,/, "");
-      console.log(this.companyForm);
-
       this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + this.base64String);
     }
     reader.readAsDataURL(this.imageFile);
+    if (this.imageFile) {
+      this.isImagevalue = true;
+    }
   }
 }

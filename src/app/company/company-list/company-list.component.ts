@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
@@ -14,7 +15,8 @@ export class CompanyListComponent implements OnInit {
   public companyList: Company[];
   public dataNotFound!: string;
 
-  constructor(private companyService: CompanyService, private router: Router, private dataCommunication: DataCommunicationService) {
+
+  constructor(private companyService: CompanyService, private router: Router, private dataCommunication: DataCommunicationService, private _sanitizer: DomSanitizer) {
     this.companyList = [];
     this.searchInput = "";
   }
@@ -32,7 +34,11 @@ export class CompanyListComponent implements OnInit {
    * Function for call the HTTP get service method
    */
   getCompanyData() {
+
     this.companyService.getCompanyDetails().subscribe((data: Company[]) => {
+      // data.forEach((company:Company)=>{
+      //   company.companyPath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + company.companyPath);
+      // })
       this.companyList = data;
     })
   }

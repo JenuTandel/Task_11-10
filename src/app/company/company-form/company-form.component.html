@@ -47,7 +47,7 @@
                 Upload company logo
             </span>
         </div>
-        <img [src]="imagePath" height="100" width="100">
+        <img *ngIf="isImagevalue" [src]="imagePath" height="100" width="100" alt="Logo">
 
         <div class="d-flex justify-content-end">
             <button type="reset" class="btn me-2 btn-danger" (click)="onCancel()">Cancel</button>
